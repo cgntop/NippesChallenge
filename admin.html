@@ -1,5 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Admin – Nippes Challenge</title>
 <link rel="stylesheet" href="assets.css">
 <div class="card">
@@ -73,7 +74,8 @@ function render(){
     });
     const ci = el('select', {'data-qi':qi, 'data-field':'correct'});
     q.options.forEach((_, oi)=>{
-      const opt = el('option', {value:oi}); opt.textContent = 'Richtig: Option ' + (oi+1);
+      const opt = document.createElement('option');
+      opt.value = oi; opt.textContent = 'Richtig: Option ' + (oi+1);
       if(oi===q.correctIndex) opt.selected = true;
       ci.appendChild(opt);
     });
@@ -114,7 +116,7 @@ function render(){
   // Download button
   document.getElementById('download').onclick = (e)=>{
     e.preventDefault();
-    const data = new Blob([JSON.stringify(CFG, null, 2)], {{type:'application/json'}});
+    const data = new Blob([JSON.stringify(CFG, null, 2)], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(data);
     a.download = 'config.json';
