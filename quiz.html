@@ -1,16 +1,24 @@
 <!doctype html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Station 3 – Quiz</title>
-<link rel="stylesheet" href="assets.css">
+<link id="theme" rel="stylesheet" href="assets.css">
 <div class="card">
-  <span class="pill">Nippes Challenge</span>
+  <header>
+    <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
+    <button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button>
+  </header>
+  <span class="pill">Quiz</span>
   <h1>Station 3 – Quiz</h1>
   <h2 id="subtitle">Beantworte alle Fragen</h2>
   <div id="quiz"></div>
   <a class="btn" href="#" id="check">Auswerten</a>
   <div id="result" class="result"></div>
   <hr>
-  <a class="btn" href="index.html">Zurück</a>
+  <div class="nav-next">
+    <a class="btn" href="index.html">Zurück</a>
+    <a class="btn primary" href="station.html?id=4">Weiter zu Station 4</a>
+  </div>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -28,7 +36,7 @@ function renderQuiz(cfg){
     wrap.appendChild(qel);
     item.options.forEach((opt, oi)=>{
       const lab = document.createElement('label');
-      lab.className='block';
+      lab.className='opt';
       const inp = document.createElement('input');
       inp.type='radio'; inp.name='q'+qi; inp.value=oi;
       lab.appendChild(inp);
@@ -59,4 +67,5 @@ function renderQuiz(cfg){
 loadConfig().then(cfg=>renderQuiz(cfg)).catch(e=>{
   document.getElementById('quiz').textContent = 'Fehler beim Laden der config.json';
 });
+initTheme();
 </script>

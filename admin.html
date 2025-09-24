@@ -2,11 +2,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Admin – Nippes Challenge</title>
-<link rel="stylesheet" href="assets.css">
+<link id="theme" rel="stylesheet" href="assets.css">
 <div class="card">
+  <header>
+    <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
+    <button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button>
+  </header>
   <span class="pill">Admin</span>
   <h1>Inhalte bearbeiten</h1>
-  <p>Hier kannst du Texte der Stationen und die Quizfragen ändern. Anschließend <strong>exportierst</strong> du die neue <code>config.json</code> und ersetzt sie auf deinem Webspace.</p>
+  <p>Ändere Stationstexte und Quiz. Danach <strong>config.json herunterladen</strong> und auf dem Webspace ersetzen.</p>
   <div id="root"></div>
   <hr>
   <div class="row">
@@ -31,15 +35,11 @@ function render(){
   const root = document.getElementById('root');
   root.innerHTML='';
   if(!CFG){ root.textContent='config.json konnte nicht geladen werden.'; return; }
-
-  // Meta
   root.appendChild(el('h2', {html:'Allgemein'}));
   const metaTitle = el('input', {class:'input', value: CFG.meta?.title||'', id:'metaTitle'});
   const metaSub = el('input', {class:'input', value: CFG.meta?.subtitle||'', id:'metaSub'});
   root.appendChild(el('label', {html:'Titel'})); root.appendChild(metaTitle);
   root.appendChild(el('label', {html:'Untertitel'})); root.appendChild(metaSub);
-
-  // Stations
   root.appendChild(el('h2', {html:'Stationen'}));
   CFG.stations.filter(s=>s.id).forEach((s, i)=>{
     const wrap = el('div', {class:'grid'});
@@ -58,8 +58,6 @@ function render(){
     wrap.appendChild(left); wrap.appendChild(right);
     root.appendChild(wrap);
   });
-
-  // Quiz
   root.appendChild(el('h2', {html:'Quiz'}));
   const letters = el('input', {class:'input', value:(CFG.quiz.lettersOnSuccess||[]).join(', '), id:'letters'});
   root.appendChild(el('label', {html:'Erfolgs-Buchstaben (kommagetrennt)'}));
@@ -81,8 +79,6 @@ function render(){
     });
     root.appendChild(ci);
   });
-
-  // Bind change events
   root.addEventListener('input', (e)=>{
     const t = e.target;
     if(t.id==='metaTitle'){ CFG.meta.title = t.value; }
@@ -112,19 +108,14 @@ function render(){
       CFG.quiz.questions[qi].correctIndex = parseInt(t.value,10);
     }
   });
-
-  // Download button
   document.getElementById('download').onclick = (e)=>{
     e.preventDefault();
     const data = new Blob([JSON.stringify(CFG, null, 2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(data);
-    a.download = 'config.json';
-    a.click();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(data); a.download = 'config.json'; a.click();
   };
 }
-
 loadConfig().then(cfg=>{ CFG = cfg; render(); }).catch(err=>{
   document.getElementById('root').textContent = 'Fehler beim Laden der config.json: ' + err.message;
 });
+initTheme();
 </script>
