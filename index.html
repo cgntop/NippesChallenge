@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Nippes Challenge – Online</title>
+<link rel="stylesheet" href="assets.css">
+<div class="card">
+  <span class="pill">Nippes Challenge – Squad Edition</span>
+  <h1>Online-Launcher</h1>
+  <h2 id="sub">Online-Version</h2>
+  <p>Nutze die Links unten, um die einzelnen Stationen aufzurufen. Inhalte kommen aus der <strong>config.json</strong> und können in der <a href="admin.html">Admin‑Ansicht</a> angepasst werden.</p>
+  <div class="list">
+    <a class="btn" href="station.html?id=1">Station 1</a>
+    <a class="btn" href="station.html?id=2">Station 2</a>
+    <a class="btn" href="quiz.html">Station 3 – Quiz</a>
+    <a class="btn" href="station.html?id=4">Station 4</a>
+    <a class="btn" href="station.html?id=5">Station 5</a>
+    <a class="btn" href="station.html?id=6">Station 6</a>
+  </div>
+  <hr>
+  <p class="small">Tipp: Nach Änderungen in der Admin‑Ansicht die neue <code>config.json</code> exportieren und auf dem Webspace ersetzen.</p>
+</div>
+<script src="loader.js"></script>
+<script>
+loadConfig().then(cfg=>{
+  document.querySelector('#sub').textContent = cfg.meta?.subtitle || 'Online-Version';
+}).catch(e=>console.warn(e));
+</script>

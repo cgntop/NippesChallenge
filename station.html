@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Station</title>
+<link rel="stylesheet" href="assets.css">
+<div class="card">
+  <span class="pill">Nippes Challenge</span>
+  <h1 id="title">Station</h1>
+  <h2 id="subtitle"></h2>
+  <p id="body"></p>
+  <a class="btn primary" href="index.html">Zurück</a>
+</div>
+<script src="loader.js"></script>
+<script>
+function qs(key){ const p=new URLSearchParams(location.search); return p.get(key); }
+loadConfig().then(cfg=>{
+  const id = parseInt(qs('id'),10);
+  const st = cfg.stations?.find(s=>s.id===id);
+  if(!st){ document.getElementById('title').textContent='Station nicht gefunden'; return; }
+  document.title = st.title;
+  document.getElementById('title').textContent = st.title;
+  document.getElementById('subtitle').textContent = st.subtitle || '';
+  document.getElementById('body').innerHTML = (st.body||'').replaceAll('\n','<br>');
+});
+</script>

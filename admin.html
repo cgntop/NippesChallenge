@@ -1,0 +1,128 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Admin – Nippes Challenge</title>
+<link rel="stylesheet" href="assets.css">
+<div class="card">
+  <span class="pill">Admin</span>
+  <h1>Inhalte bearbeiten</h1>
+  <p>Hier kannst du Texte der Stationen und die Quizfragen ändern. Anschließend <strong>exportierst</strong> du die neue <code>config.json</code> und ersetzt sie auf deinem Webspace.</p>
+  <div id="root"></div>
+  <hr>
+  <div class="row">
+    <a class="btn primary" href="#" id="download">config.json herunterladen</a>
+    <a class="btn" href="index.html">Zurück</a>
+  </div>
+</div>
+<script src="loader.js"></script>
+<script>
+let CFG=null;
+function el(tag, attrs={}, children=[]){
+  const e = document.createElement(tag);
+  Object.entries(attrs).forEach(([k,v])=>{
+    if(k==='class') e.className=v;
+    else if(k==='html') e.innerHTML=v;
+    else e.setAttribute(k,v);
+  });
+  children.forEach(c=> e.appendChild(c));
+  return e;
+}
+function render(){
+  const root = document.getElementById('root');
+  root.innerHTML='';
+  if(!CFG){ root.textContent='config.json konnte nicht geladen werden.'; return; }
+
+  // Meta
+  root.appendChild(el('h2', {html:'Allgemein'}));
+  const metaTitle = el('input', {class:'input', value: CFG.meta?.title||'', id:'metaTitle'});
+  const metaSub = el('input', {class:'input', value: CFG.meta?.subtitle||'', id:'metaSub'});
+  root.appendChild(el('label', {html:'Titel'})); root.appendChild(metaTitle);
+  root.appendChild(el('label', {html:'Untertitel'})); root.appendChild(metaSub);
+
+  // Stations
+  root.appendChild(el('h2', {html:'Stationen'}));
+  CFG.stations.filter(s=>s.id).forEach((s, i)=>{
+    const wrap = el('div', {class:'grid'});
+    const left = el('div');
+    left.appendChild(el('label', {html:'Titel'}));
+    const it = el('input', {class:'input', value:s.title, 'data-id':s.id, 'data-field':'title'});
+    left.appendChild(it);
+    left.appendChild(el('label', {html:'Untertitel'}));
+    const isub = el('input', {class:'input', value:s.subtitle||'', 'data-id':s.id, 'data-field':'subtitle'});
+    left.appendChild(isub);
+    const right = el('div');
+    right.appendChild(el('label', {html:'Text'}));
+    const ta = el('textarea', {class:'input', 'data-id':s.id, 'data-field':'body'});
+    ta.value = s.body||'';
+    right.appendChild(ta);
+    wrap.appendChild(left); wrap.appendChild(right);
+    root.appendChild(wrap);
+  });
+
+  // Quiz
+  root.appendChild(el('h2', {html:'Quiz'}));
+  const letters = el('input', {class:'input', value:(CFG.quiz.lettersOnSuccess||[]).join(', '), id:'letters'});
+  root.appendChild(el('label', {html:'Erfolgs-Buchstaben (kommagetrennt)'}));
+  root.appendChild(letters);
+  CFG.quiz.questions.forEach((q, qi)=>{
+    root.appendChild(el('h3', {html:'Frage ' + (qi+1)}));
+    const qt = el('input', {class:'input', value:q.text, 'data-qi':qi, 'data-field':'text'});
+    root.appendChild(el('label', {html:'Fragetext'})); root.appendChild(qt);
+    q.options.forEach((opt, oi)=>{
+      const op = el('input', {class:'input', value:opt, 'data-qi':qi, 'data-oi':oi, 'data-field':'option'});
+      root.appendChild(el('label', {html:'Option ' + (oi+1)})); root.appendChild(op);
+    });
+    const ci = el('select', {'data-qi':qi, 'data-field':'correct'});
+    q.options.forEach((_, oi)=>{
+      const opt = el('option', {value:oi}); opt.textContent = 'Richtig: Option ' + (oi+1);
+      if(oi===q.correctIndex) opt.selected = true;
+      ci.appendChild(opt);
+    });
+    root.appendChild(ci);
+  });
+
+  // Bind change events
+  root.addEventListener('input', (e)=>{
+    const t = e.target;
+    if(t.id==='metaTitle'){ CFG.meta.title = t.value; }
+    else if(t.id==='metaSub'){ CFG.meta.subtitle = t.value; }
+    else if(t.id==='letters'){ CFG.quiz.lettersOnSuccess = t.value.split(',').map(s=>s.trim()).filter(Boolean); }
+    else if(t.dataset && t.dataset.id){
+      const id = parseInt(t.dataset.id,10);
+      const st = CFG.stations.find(x=>x.id===id);
+      if(!st) return;
+      if(t.dataset.field==='title') st.title = t.value;
+      if(t.dataset.field==='subtitle') st.subtitle = t.value;
+      if(t.dataset.field==='body') st.body = t.value;
+    } else if(t.dataset && t.dataset.qi){
+      const qi = parseInt(t.dataset.qi,10);
+      const q = CFG.quiz.questions[qi];
+      if(t.dataset.field==='text') q.text = t.value;
+      if(t.dataset.field==='option'){
+        const oi = parseInt(t.dataset.oi,10);
+        q.options[oi] = t.value;
+      }
+    }
+  });
+  root.addEventListener('change', (e)=>{
+    const t = e.target;
+    if(t.dataset && t.dataset.qi && t.dataset.field==='correct'){
+      const qi = parseInt(t.dataset.qi,10);
+      CFG.quiz.questions[qi].correctIndex = parseInt(t.value,10);
+    }
+  });
+
+  // Download button
+  document.getElementById('download').onclick = (e)=>{
+    e.preventDefault();
+    const data = new Blob([JSON.stringify(CFG, null, 2)], {{type:'application/json'}});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(data);
+    a.download = 'config.json';
+    a.click();
+  };
+}
+
+loadConfig().then(cfg=>{ CFG = cfg; render(); }).catch(err=>{
+  document.getElementById('root').textContent = 'Fehler beim Laden der config.json: ' + err.message;
+});
+</script>
