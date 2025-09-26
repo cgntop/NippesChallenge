@@ -1,13 +1,22 @@
 <!doctype html>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin – Inhalte bearbeiten</title>
-<link rel="stylesheet" href="assets.css">
-<div class="main">
-  <h1>Admin – Inhalte bearbeiten</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin – Nippes Challenge</title>
+<link id="theme" rel="stylesheet" href="assets.css">
+<div class="card">
+  <header>
+    <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
+    <button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button>
+  </header>
+  <span class="pill">Admin</span>
+  <h1>Inhalte bearbeiten</h1>
+  <p>Ändere Stationstexte und Quiz. Danach <strong>config.json herunterladen</strong> und auf dem Webspace ersetzen.</p>
   <div id="root"></div>
   <hr>
-  <a class="btn primary" href="#" id="download">config.json herunterladen</a>
+  <div class="row">
+    <a class="btn primary" href="#" id="download">config.json herunterladen</a>
+    <a class="btn" href="index.html">Zurück</a>
+  </div>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -15,7 +24,9 @@ let CFG=null;
 function el(tag, attrs={}, children=[]){
   const e = document.createElement(tag);
   Object.entries(attrs).forEach(([k,v])=>{
-    if(k==='class') e.className=v; else if(k==='html') e.innerHTML=v; else e.setAttribute(k,v);
+    if(k==='class') e.className=v;
+    else if(k==='html') e.innerHTML=v;
+    else e.setAttribute(k,v);
   });
   children.forEach(c=> e.appendChild(c));
   return e;
@@ -30,18 +41,21 @@ function render(){
   root.appendChild(el('label', {html:'Titel'})); root.appendChild(metaTitle);
   root.appendChild(el('label', {html:'Untertitel'})); root.appendChild(metaSub);
   root.appendChild(el('h2', {html:'Stationen'}));
-  CFG.stations.filter(s=>s.id).forEach((s)=>{
-    const wrap = el('div');
-    wrap.appendChild(el('label', {html:'Titel'}));
+  CFG.stations.filter(s=>s.id).forEach((s, i)=>{
+    const wrap = el('div', {class:'grid'});
+    const left = el('div');
+    left.appendChild(el('label', {html:'Titel'}));
     const it = el('input', {class:'input', value:s.title, 'data-id':s.id, 'data-field':'title'});
-    wrap.appendChild(it);
-    wrap.appendChild(el('label', {html:'Untertitel'}));
+    left.appendChild(it);
+    left.appendChild(el('label', {html:'Untertitel'}));
     const isub = el('input', {class:'input', value:s.subtitle||'', 'data-id':s.id, 'data-field':'subtitle'});
-    wrap.appendChild(isub);
-    wrap.appendChild(el('label', {html:'Text'}));
+    left.appendChild(isub);
+    const right = el('div');
+    right.appendChild(el('label', {html:'Text'}));
     const ta = el('textarea', {class:'input', 'data-id':s.id, 'data-field':'body'});
     ta.value = s.body||'';
-    wrap.appendChild(ta);
+    right.appendChild(ta);
+    wrap.appendChild(left); wrap.appendChild(right);
     root.appendChild(wrap);
   });
   root.appendChild(el('h2', {html:'Quiz'}));
@@ -97,13 +111,11 @@ function render(){
   document.getElementById('download').onclick = (e)=>{
     e.preventDefault();
     const data = new Blob([JSON.stringify(CFG, null, 2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(data);
-    a.download = 'config.json';
-    a.click();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(data); a.download = 'config.json'; a.click();
   };
 }
-loadConfig().then(cfg=>{ CFG = cfg; render(); }).catch(()=>{
-  document.getElementById('root').textContent = 'Fehler beim Laden der config.json';
+loadConfig().then(cfg=>{ CFG = cfg; render(); }).catch(err=>{
+  document.getElementById('root').textContent = 'Fehler beim Laden der config.json: ' + err.message;
 });
+initTheme();
 </script>

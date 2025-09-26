@@ -1,14 +1,21 @@
 <!doctype html>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Station 3 – Quiz</title>
-<link rel="stylesheet" href="assets.css">
-<div class="main">
+<link id="theme" rel="stylesheet" href="assets.css">
+<div class="card">
+  <header>
+    <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
+    <button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button>
+  </header>
+  <span class="pill">Quiz</span>
   <h1>Station 3 – Quiz</h1>
-  <h2>Beantworte alle Fragen</h2>
+  <h2 id="subtitle">Beantworte alle Fragen</h2>
   <div id="quiz"></div>
-  <a class="btn primary" href="#" id="check">Auswerten</a>
+  <a class="btn" href="#" id="check">Auswerten</a>
   <div id="result" class="result"></div>
+  <hr>
+  
 </div>
 <script src="loader.js"></script>
 <script>
@@ -18,10 +25,12 @@ function renderQuiz(cfg){
   const q = cfg.quiz;
   if(!q){ holder.textContent='Kein Quiz in config.json'; return; }
   q.questions.forEach((item, qi)=>{
+    const wrap = document.createElement('div');
+    wrap.className='qwrap';
     const qel = document.createElement('div');
     qel.className='q';
     qel.textContent = (qi+1) + ') ' + item.text;
-    holder.appendChild(qel);
+    wrap.appendChild(qel);
     item.options.forEach((opt, oi)=>{
       const lab = document.createElement('label');
       lab.className='opt';
@@ -29,8 +38,9 @@ function renderQuiz(cfg){
       inp.type='radio'; inp.name='q'+qi; inp.value=oi;
       lab.appendChild(inp);
       lab.append(' ' + opt);
-      holder.appendChild(lab);
+      wrap.appendChild(lab);
     });
+    holder.appendChild(wrap);
   });
   document.getElementById('check').onclick = (e)=>{
     e.preventDefault();
@@ -51,7 +61,8 @@ function renderQuiz(cfg){
     }
   };
 }
-loadConfig().then(cfg=>renderQuiz(cfg)).catch(()=>{
+loadConfig().then(cfg=>renderQuiz(cfg)).catch(e=>{
   document.getElementById('quiz').textContent = 'Fehler beim Laden der config.json';
 });
+initTheme();
 </script>
