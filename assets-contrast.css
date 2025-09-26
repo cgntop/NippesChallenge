@@ -1,3 +1,6 @@
+nobackbttn
+:root{--bg:#fff;--fg:#000;--card:#fff;--brand-bg:#ffe600;}
+=======
 
 :root{
   --bg:#ffffff; --fg:#000000; --card:#ffffff; --muted:#1a1a1a; --brand:#000000; --brand-bg:#ffe600;
@@ -22,3 +25,4 @@ h2{ font-size: clamp(20px, 4.8vw, 24px); margin:.2em 0 1em; }
 label.opt{ display:flex; align-items:center; gap:1em; padding:1em; border:3px solid var(--border); }
 input[type=radio]{ width:28px; height:28px; accent-color:#000; }
 hr{ border:0; border-top:3px solid #000; margin:1.2em 0; }
+

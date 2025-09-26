@@ -1,8 +1,12 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Station</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link id="theme" rel="stylesheet" href="assets.css">
+nobackbttn
+<div class="card"><header><div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div><button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button></header><span class="pill">Station</span><h1 id="title"></h1><h2 id="subtitle"></h2><p id="body"></p></div>
+<script src="loader.js"></script><script>
+function qs(k){return new URLSearchParams(location.search).get(k);}
+loadConfig().then(cfg=>{const id=parseInt(qs('id'));const st=cfg.stations.find(s=>s.id===id);if(st){document.title=st.title;title.textContent=st.title;subtitle.textContent=st.subtitle||'';body.innerHTML=(st.body||'').replaceAll('\n','<br>');}});
+=======
 <div class="card">
   <header>
     <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
@@ -26,5 +30,6 @@ loadConfig().then(cfg=>{
   document.getElementById('subtitle').textContent = st.subtitle || '';
   document.getElementById('body').innerHTML = (st.body||'').replaceAll('\n','<br>');
 }).catch(e=>console.warn(e));
+main
 initTheme();
 </script>
