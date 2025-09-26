@@ -1,1 +1,81 @@
-{"meta": {"title": "Nippes Challenge \u2013 Squad Edition", "subtitle": "Online-Version"}, "stations": [{}, {"id": 1, "title": "Station 1", "subtitle": "", "body": "..."}, {"id": 2, "title": "Station 2", "subtitle": "", "body": "..."}], "quiz": {"lettersOnSuccess": ["N", "I", "P"], "questions": [{"text": "Q1", "options": ["A", "B"], "correctIndex": 0}]}}
+{
+  "meta": {
+    "title": "Nippes Challenge – Squad Edition",
+    "subtitle": "Online-Version"
+  },
+  "stations": [
+    {},
+    {
+      "id": 1,
+      "title": "Station 1 – Street Search",
+      "subtitle": "Xantener Straße / Neusser Straße",
+      "body": "Findet das markante Straßendetail und zählt die Buchstaben im Schriftzug. Ergebnis = 1. Ziffer des Finalcodes."
+    },
+    {
+      "id": 2,
+      "title": "Station 2 – Kreativ-Task",
+      "subtitle": "Floragarten",
+      "body": "Erfindet einen Squad-Slogan (max. 8 Wörter) und nehmt ihn als Gruppenvideo auf. Bonuszahl, wenn jemand Fremdes mitmacht."
+    },
+    {
+      "id": 3,
+      "title": "Station 3 – Mini-Quiz",
+      "subtitle": "Bürgerzentrum Nippes",
+      "body": "Beantworte 3 Fragen richtig, um die Buchstaben für das nächste Ziel zu erhalten."
+    },
+    {
+      "id": 4,
+      "title": "Station 4 – Snack Mission",
+      "subtitle": "Neusser Straße – Bäckerei/Kiosk",
+      "body": "Findet einen Snack mit S und macht ein Selfie. Der Preis (gerundet) ist die 3. Ziffer des Codes."
+    },
+    {
+      "id": 5,
+      "title": "Station 5 – Park Action",
+      "subtitle": "Johannes-Giesberts-Park",
+      "body": "Mini-Parcours: Slalom → Balancieren → 3× Hüpfen. Unter einer Zeit? Bonuszahl!"
+    },
+    {
+      "id": 6,
+      "title": "Station 6 – People Hunt",
+      "subtitle": "Rückweg zum Parkveedel",
+      "body": "Foto mit jemandem mit Hut/Sonnenbrille. Wenn nicht möglich: improvisiert Verkleidung & Gruppenfoto."
+    }
+  ],
+  "quiz": {
+    "lettersOnSuccess": [
+      "N",
+      "I",
+      "P"
+    ],
+    "questions": [
+      {
+        "text": "Wie viele Ringe hat das Kölner Stadtwappen?",
+        "options": [
+          "3",
+          "5",
+          "11"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "text": "Welche Linie fährt von Nippes bis Sülz?",
+        "options": [
+          "18",
+          "12",
+          "15"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "text": "Was heißt „Veedel“?",
+        "options": [
+          "Viertel / Stadtteil",
+          "Kirche",
+          "Fest"
+        ],
+        "correctIndex": 0
+      }
+    ]
+  }
+}
