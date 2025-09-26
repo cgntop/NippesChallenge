@@ -1,12 +1,8 @@
 <!doctype html>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Station</title>
 <link id="theme" rel="stylesheet" href="assets.css">
-nobackbttn
-<div class="card"><header><div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div><button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button></header><span class="pill">Station</span><h1 id="title"></h1><h2 id="subtitle"></h2><p id="body"></p></div>
-<script src="loader.js"></script><script>
-function qs(k){return new URLSearchParams(location.search).get(k);}
-loadConfig().then(cfg=>{const id=parseInt(qs('id'));const st=cfg.stations.find(s=>s.id===id);if(st){document.title=st.title;title.textContent=st.title;subtitle.textContent=st.subtitle||'';body.innerHTML=(st.body||'').replaceAll('\n','<br>');}});
-=======
 <div class="card">
   <header>
     <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
@@ -16,8 +12,10 @@ loadConfig().then(cfg=>{const id=parseInt(qs('id'));const st=cfg.stations.find(s
   <h1 id="title">Station</h1>
   <h2 id="subtitle"></h2>
   <p id="body"></p>
-  <hr>
-  <a class="btn" href="index.html">Zurück zum Start</a>
+  <div class="nav-next">
+    <a class="btn" href="index.html">Zurück</a>
+    <a id="nextLink" class="btn primary" href="#">Weiter zur nächsten Station</a>
+  </div>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -29,7 +27,12 @@ loadConfig().then(cfg=>{
   document.title = st.title; document.getElementById('title').textContent = st.title;
   document.getElementById('subtitle').textContent = st.subtitle || '';
   document.getElementById('body').innerHTML = (st.body||'').replaceAll('\n','<br>');
+  // Next link logic (3 -> quiz, otherwise next station)
+  const next = (id===3) ? 'quiz.html' : ('station.html?id=' + (id+1));
+  const lastId = Math.max(...cfg.stations.filter(s=>s.id).map(s=>s.id));
+  const nextEl = document.getElementById('nextLink');
+  if(id >= lastId){ nextEl.textContent = 'Zum Finale / Start'; nextEl.href = 'index.html'; }
+  else { nextEl.href = next; }
 }).catch(e=>console.warn(e));
-main
 initTheme();
 </script>

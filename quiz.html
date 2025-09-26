@@ -1,12 +1,8 @@
 <!doctype html>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Station 3 – Quiz</title>
 <link id="theme" rel="stylesheet" href="assets.css">
-nobackbttn
-<div class="card"><header><div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div><button id="themeToggle" class="btn ghost" onclick="toggleTheme()">Hoher Kontrast</button></header><span class="pill">Quiz</span><h1>Station 3 – Quiz</h1><div id="quiz"></div><a class="btn" href="#" id="check">Auswerten</a><div id="result" class="result"></div></div>
-<script src="loader.js"></script><script>
-function renderQuiz(cfg){const holder=document.getElementById('quiz');const q=cfg.quiz;q.questions.forEach((item,qi)=>{const d=document.createElement('div');d.innerHTML='<p>'+item.text+'</p>';holder.appendChild(d);});}
-loadConfig().then(cfg=>renderQuiz(cfg));
-=======
 <div class="card">
   <header>
     <div class="brand"><span class="logo">💜🎒</span><span class="title">Nippes Challenge</span></div>
@@ -19,7 +15,10 @@ loadConfig().then(cfg=>renderQuiz(cfg));
   <a class="btn" href="#" id="check">Auswerten</a>
   <div id="result" class="result"></div>
   <hr>
-  <a class="btn" href="index.html">Zurück zum Start</a>
+  <div class="nav-next">
+    <a class="btn" href="index.html">Zurück</a>
+    <a class="btn primary" href="station.html?id=4">Weiter zu Station 4</a>
+  </div>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -68,6 +67,5 @@ function renderQuiz(cfg){
 loadConfig().then(cfg=>renderQuiz(cfg)).catch(e=>{
   document.getElementById('quiz').textContent = 'Fehler beim Laden der config.json';
 });
-main
 initTheme();
 </script>

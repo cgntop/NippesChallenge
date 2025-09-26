@@ -1,6 +1,3 @@
-nobackbttn
-<!doctype html><meta charset='utf-8'><title>Nippes Challenge</title><link id='theme' rel='stylesheet' href='assets.css'><div class='card'><h1>Start</h1></div>
-=======
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -14,7 +11,7 @@ nobackbttn
   <span class="pill">Squad Edition</span>
   <h1>Online-Launcher</h1>
   <h2 id="sub">Online-Version</h2>
-  <p>Die Stationen werden ausschließlich über die <strong>gedruckten QR-Codes</strong> aufgerufen.</p>
+  <p>Wähle eine Station. Inhalte sind editierbar in der <a href="admin.html">Admin‑Ansicht</a>.</p>
   <div class="list">
     <a class="btn primary" href="station.html?id=1">Station 1</a>
     <a class="btn primary" href="station.html?id=2">Station 2</a>
@@ -24,7 +21,7 @@ nobackbttn
     <a class="btn primary" href="station.html?id=6">Station 6</a>
   </div>
   <hr>
-  <p class="small">Änderungen über <a href="admin.html">Admin-Ansicht</a> → neue <code>config.json</code> exportieren.</p>
+  <p class="small">Tipp: Nach Änderungen die neue <code>config.json</code> exportieren und ersetzen.</p>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -33,4 +30,3 @@ loadConfig().then(cfg=>{
 }).catch(e=>console.warn(e));
 initTheme();
 </script>
-main
