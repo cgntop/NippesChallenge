@@ -12,10 +12,8 @@
   <h1 id="title">Station</h1>
   <h2 id="subtitle"></h2>
   <p id="body"></p>
-  <div class="nav-next">
-    <a class="btn" href="index.html">Zurück</a>
-    <a id="nextLink" class="btn primary" href="#">Weiter zur nächsten Station</a>
-  </div>
+  <hr>
+  <a class="btn" href="index.html">Zurück zum Start</a>
 </div>
 <script src="loader.js"></script>
 <script>
@@ -27,12 +25,6 @@ loadConfig().then(cfg=>{
   document.title = st.title; document.getElementById('title').textContent = st.title;
   document.getElementById('subtitle').textContent = st.subtitle || '';
   document.getElementById('body').innerHTML = (st.body||'').replaceAll('\n','<br>');
-  // Next link logic (3 -> quiz, otherwise next station)
-  const next = (id===3) ? 'quiz.html' : ('station.html?id=' + (id+1));
-  const lastId = Math.max(...cfg.stations.filter(s=>s.id).map(s=>s.id));
-  const nextEl = document.getElementById('nextLink');
-  if(id >= lastId){ nextEl.textContent = 'Zum Finale / Start'; nextEl.href = 'index.html'; }
-  else { nextEl.href = next; }
 }).catch(e=>console.warn(e));
 initTheme();
 </script>
