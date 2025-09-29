@@ -55,7 +55,7 @@ function renderQuiz(cfg){
     if(!ok){ res.innerHTML = 'Bitte alle Fragen beantworten.'; return; }
     if(correct === q.questions.length){
       const letters = (q.lettersOnSuccess||[]).join(' ');
-      res.innerHTML = '<strong>Top!</strong> Die Buchstaben sind: <strong>'+letters+'</strong>';
+      res.innerHTML = '<strong>Top!</strong> Die gesuchte Zahl ist: <strong>'+letters+'</strong>';
     }else{
       res.innerHTML = 'Noch nicht ganz richtig – versucht es nochmal!';
     }
