@@ -73,6 +73,15 @@
           "Fest"
         ],
         "correctIndex": 0
+      },
+      {
+        "text": "Hier eine weitere Frage?",
+        "options": [
+          "Antwort 1",
+          "Antwort 2",
+          "Antwort 3"
+        ],
+        "correctIndex": 0
       }
     ]
   }
