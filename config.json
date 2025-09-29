@@ -27,7 +27,7 @@
       "id": 4,
       "title": "Challenge 4 – Tausch Mission",
       "subtitle": "von der Mandarine zum?",
-      "body": "Fangt hier auf dem Lufti an und tauscht in 3 Gruppen die Mandarine gegen etwas anderes. Seid gespannt was nach maximal 5 mal Tauschen daraus werden kann"
+      "body": "Fangt hier auf dem Lufti an und tauscht in 3 Gruppen die Mandarine gegen etwas anderes. Seid gespannt was nach maximal 5 mal Tauschen daraus werden kann. Erlaubt ist es freundliche Ansprechend von Passanten oder Klingeln an einer Haustüre."
     },
     {
       "id": 5,
@@ -44,9 +44,7 @@
   ],
   "quiz": {
     "lettersOnSuccess": [
-      "N",
-      "I",
-      "P"
+      "3",
     ],
     "questions": [
       {
@@ -59,13 +57,13 @@
         "correctIndex": 0
       },
       {
-        "text": "Welche Linie fährt von Nippes bis Sülz?",
+        "text": "Welcher Platz ist der Schönste?",
         "options": [
-          "18",
-          "12",
-          "15"
+          "Fenster",
+          "Gang",
+          "An der Theke"
         ],
-        "correctIndex": 1
+        "correctIndex": 2
       },
       {
         "text": "Was heißt „Veedel“?",
