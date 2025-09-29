@@ -14,7 +14,7 @@
     {
       "id": 2,
       "title": "Challenge 2 – Mini-Theater-Challenge",
-      "subtitle": "Werdet kreativ!",
+      "subtitle": "Auf zum Spielplatz im Johannes-Giesberts-Park",
       "body": "Spielt eine Szene (z. B. „ein Dieb stiehlt ein Eis“ oder „Superheld rettet den Tag“), fotografiert oder inszeniert es in Standbildern."
     },
     {
@@ -31,15 +31,15 @@
     },
     {
       "id": 5,
-      "title": "Station 5 – Park Action",
-      "subtitle": "Johannes-Giesberts-Park",
-      "body": "Mini-Parcours: Slalom → Balancieren → 3× Hüpfen. Unter einer Zeit? Bonuszahl!"
+      "title": "Challenge 5 – Cameo Challenge",
+      "subtitle": "neue Accessoires, neue Bekanntschaften?",
+      "body": "Sprecht Menschen mit schönen Sonnenbrillen, Hüten, Jacken oder ähnlichem an und bittet darum sie euch für ein Foto ausleihen zu dürfen."
     },
     {
       "id": 6,
-      "title": "Station 6 – People Hunt",
-      "subtitle": "Rückweg zum Parkveedel",
-      "body": "Foto mit jemandem mit Hut/Sonnenbrille. Wenn nicht möglich: improvisiert Verkleidung & Gruppenfoto."
+      "title": "Challenge 6 – Treasure Hunt",
+      "subtitle": "Findet das Schloss und öffnet es mit eurem Zahlencode",
+      "body": "Was waren das eben noch für Zahlen, oder doch Koordinaten?"
     }
   ],
   "quiz": {
