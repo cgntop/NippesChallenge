@@ -48,7 +48,7 @@
     ],
     "questions": [
       {
-        "text": "Wie viele Ringe hat das Kölner Stadtwappen?",
+        "text": "Wie viele Kronen sind auf dem Kölner Stadtwappen zu sehen?",
         "options": [
           "3",
           "5",
@@ -66,22 +66,40 @@
         "correctIndex": 2
       },
       {
-        "text": "Was heißt „Veedel“?",
+        "text": "Wie viele Brücken gehen in Köln über den Rhein“?",
         "options": [
-          "Viertel / Stadtteil",
-          "Kirche",
-          "Fest"
+          "6",
+          "7",
+          "8"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "text": "Was wurde auf dem Clouth Gelände früher produziert?",
+        "options": [
+          "Gummi",
+          "Schokolade",
+          "Chips"
         ],
         "correctIndex": 0
       },
       {
-        "text": "Hier eine weitere Frage?",
+        "text": "Wie viele Pizzen hat 485° im Angebot?",
         "options": [
-          "Antwort 1",
-          "Antwort 2",
-          "Antwort 3"
+          "Mehr als 20",
+          "Weniger 10",
+          "Ich mag Pinsha"
         ],
         "correctIndex": 0
+      },
+      {
+        "text": "Als wie vieltes Veedel wird Nippes in der FC Hymne genannt?",
+        "options": [
+          "1",
+          "2",
+          "3"
+        ],
+        "correctIndex": 2
       }
     ]
   }
